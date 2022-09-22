@@ -39,5 +39,13 @@ namespace Selenium.pages
             _browser.Page.GoToUrl("http://www.github.com");
             return new RegisterPage(_browser);
         }
+
+        public RegisterPage OpenIwmsPage()
+        {
+            Console.WriteLine("Navigating to IWMS page");
+            _browser.Page.GoToUrl("https://questil.com/iwmsdev");
+            
+            return new RegisterPage(_browser);
+        }
     }
 }
