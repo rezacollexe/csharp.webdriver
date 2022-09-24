@@ -17,7 +17,9 @@ namespace Selenium.core.browsers
             var dirName = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
             var fileInfo = new FileInfo(dirName);
             var parentDirName = fileInfo?.FullName;
-            return new BrowserAdapter<ChromeDriver>(new ChromeDriver(parentDirName + @"libs"), BrowserType.Chrome);
+            var ChromeOpt = new ChromeOptions();
+            ChromeOpt.AddArgument("--start-maximized");
+            return new BrowserAdapter<ChromeDriver>(new ChromeDriver(parentDirName + @"libs",ChromeOpt), BrowserType.Chrome);
         }
 
         IBrowser<FirefoxDriver> IBrowserWebDriver<FirefoxDriver>.Create()

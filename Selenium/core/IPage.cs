@@ -11,7 +11,7 @@ namespace Selenium.core
         new string CurrentWindowHandle { get; }
         new ReadOnlyCollection<string> WindowHandles { get; }
         void GoToUrl(string url);
-        new IWebElement FindElement(By by);
+        IWebElement FindElement(By by, int timeoutInSeconds=50);
         new IEnumerable<IWebElement> FindElements(By selector);
         void NavigateBack();
         void Refresh();

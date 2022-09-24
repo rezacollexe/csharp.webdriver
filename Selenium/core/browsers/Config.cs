@@ -28,6 +28,7 @@ namespace Selenium.core.browsers
         public static string BrowserStackHubUrl => GetValue("BrowserStackHubUrl");
         public static string BrowserStackUsername => GetValue("BrowserStackUsername");
         public static string BrowserStackAccessKey => GetValue("BrowserStackAccessKey");
+        public static int TimeOutWaiting => Convert.ToInt32(GetValue("TimeOutWaiting"));
 
         private static string GetValue(string value)
         {

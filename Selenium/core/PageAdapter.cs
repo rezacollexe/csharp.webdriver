@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Selenium.core.browsers;
 
 namespace Selenium.core
@@ -51,14 +53,18 @@ namespace Selenium.core
             _driver.Quit();
         }
 
-        public IWebElement FindElement(By by)
-        {
-            return _driver.FindElement(by);
-        }
-
+      
         ReadOnlyCollection<IWebElement> ISearchContext.FindElements(By by)
         {
+
+            var _timeoutInSeconds = Config.TimeOutWaiting;
+            if (_timeoutInSeconds > 0)
+            {
+                var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(_timeoutInSeconds));
+                return wait.Until(drv => drv.FindElements(by));
+            }
             return _driver.FindElements(by);
+            //return _driver.FindElements(by);
         }
 
         public IOptions Manage()
@@ -81,6 +87,24 @@ namespace Selenium.core
         public void Dispose()
         {
             _driver.SwitchTo();
+        }
+
+       
+
+        public IWebElement FindElement(By by, int timeoutInSeconds=50)
+        {
+            var _timeoutInSeconds = timeoutInSeconds;
+            if (_timeoutInSeconds > 0)
+            {
+                var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(_timeoutInSeconds));
+                return wait.Until(drv => drv.FindElement(by));
+            }
+            return _driver.FindElement(by);
+        }
+
+        public IWebElement FindElement(By by)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenQA.Selenium;
 using Selenium.core.browsers;
 
 namespace Selenium.pages
@@ -44,6 +45,15 @@ namespace Selenium.pages
         {
             Console.WriteLine("Navigating to IWMS page");
             _browser.Page.GoToUrl("https://questil.com/iwmsdev");
+            
+            return new RegisterPage(_browser);
+        }
+
+        public RegisterPage OpenEtenderPage()
+        {
+            Console.WriteLine("Navigating to IWMS page");
+            
+            _browser.Page.GoToUrl("https://app-plx-staging.azurewebsites.net");
             
             return new RegisterPage(_browser);
         }
